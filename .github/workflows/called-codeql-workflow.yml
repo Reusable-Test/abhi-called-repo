@@ -53,32 +53,7 @@ jobs:
     - name: Set up jq
       run: sudo apt-get install -y jq
 
-    - name: Find CodeQL vulnerabilities
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OWNER: Reusable-Test  # Replace with the repository owner username
-          REPO: abhi-calling-repo    # Replace with the repository name
-      run: |
-          #!/bin/bash
-
-          set -e  # Exit immediately if a command exits with a non-zero status
-
-          # Function to fetch vulnerabilities
-          fetch_vulnerabilities() {
-            local url="https://api.github.com/repos/${OWNER}/${REPO}/code-scanning/alerts"
-            local result=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" -H "Accept: application/vnd.github.v3+json" "$url")
-            if [[ $(echo "$result" | jq '. | length') -eq 0 ]]; then
-              echo "No vulnerabilities found."
-            else
-              local count=$(echo "$result" | jq '. | length')
-              echo "Total number of CodeQL vulnerabilities: $count"
-              exit 1  # Exit with a non-zero status to indicate an error condition
-            fi
-            }
-          
-
-          # Main script execution
-          fetch_vulnerabilities
+    
     
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
