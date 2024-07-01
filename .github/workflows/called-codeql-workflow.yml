@@ -73,6 +73,7 @@ jobs:
               local count=$(echo "$result" | jq '. | length')
               echo "Total number of CodeQL vulnerabilities: $count"
               exit 1  # Exit with a non-zero status to indicate an error condition
+            fi
             }
           
 
