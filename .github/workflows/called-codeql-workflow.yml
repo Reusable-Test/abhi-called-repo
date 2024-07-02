@@ -57,7 +57,7 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OWNER: Reusable-Test  # Replace with the repository owner username
-          REPO: abhi-calling-repo    # Replace with the repository name
+          REPO: ${{ github.repository }}    # Replace with the repository name
       run: |
           #!/bin/bash
 
