@@ -65,7 +65,7 @@ jobs:
 
           # Function to fetch vulnerabilities
           fetch_vulnerabilities() {
-            local url="https://api.github.com/repos/${OWNER}/${REPO}/code-scanning/alerts"
+            local url="https://api.github.com/repos/${REPO}/code-scanning/alerts"
             local result=$(curl -s -H "Authorization: token ${GITHUB_TOKEN}" -H "Accept: application/vnd.github.v3+json" "$url")
             local open_vulnerabilities=$(echo "$result" | jq '[.[] | select(.state == "open")] | length')
 
