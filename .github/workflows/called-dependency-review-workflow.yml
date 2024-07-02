@@ -1,14 +1,16 @@
 name: dependency-review
 on:
   workflow_call:
-jobs:
-  dependency-review:
-    runs-on: ubuntu-latest
-    permissions:
+
+permissions:
       pull-requests: write
        # only required for workflows in private repositories
       actions: read
       contents: read
+jobs:
+  dependency-review:
+    runs-on: ubuntu-latest
+   
     steps:
       - name: 'Checkout Repository'
         uses: actions/checkout@v4
