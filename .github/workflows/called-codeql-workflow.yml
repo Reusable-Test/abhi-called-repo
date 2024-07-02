@@ -58,6 +58,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OWNER: Reusable-Test  # Replace with the repository owner username
           REPO: ${{ github.repository }}    # Replace with the repository name
+          PRNUMBER: ${{ github.event.pull_request.number }}
       run: |
           #!/bin/bash
 
@@ -71,6 +72,8 @@ jobs:
 
            if [ "$open_vulnerabilities" -gt 0 ]; then
              echo "Found $open_vulnerabilities open vulnerabilities."
+             local url="https://api.github.com/repos/${REPO}/pulls/${PRNUMBER}/comments"
+             curl -s -H "Authorization: token ${GITHUB_TOKEN}" -H "Accept: application/vnd.github.v3+json" "$url" -d '{"body":"Found $open_vulnerabilities open vulnerabilities."}'
              exit 1  # Exit with a non-zero status to indicate an error condition
            else
              echo "No open vulnerabilities found."
