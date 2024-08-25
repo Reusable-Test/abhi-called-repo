@@ -20,3 +20,4 @@ jobs:
           comment-summary-in-pr: true
           fail-on-severity: low
           vulnerability-check: true
+          show-openssf-scorecard: true
